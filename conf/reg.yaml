@@ -1,0 +1,13 @@
+discovery:
+  type: servicecenter
+  address: http://127.0.0.1:30100
+  fetchInterval: 30s
+registrator:
+  type: servicecenter
+  address: http://127.0.0.1:30100
+  heartbeatInterval: 30s
+auth:
+  accessKey:
+  secretKey:
+  project:
+
