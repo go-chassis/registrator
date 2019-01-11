@@ -9,19 +9,20 @@ import (
 var Config = &Configuration{}
 
 type Configuration struct {
-	Discovery   Discovery   `yaml:"discovery"`
-	Registrator Registrator `yaml:"registrator"`
-	Auth        Auth        `yaml:"auth"`
+	Source Source `yaml:"source"`
+	Target Target `yaml:"target"`
+	Auth   Auth   `yaml:"auth"`
 }
 
-type Discovery struct {
+type Source struct {
 	Address string `yaml:"address"`
-	T       string `yaml:"type"`
+	Type    string `yaml:"type"`
 	Auth    Auth   `yaml:"auth"` //TODO register between tenants
+	Exclude string `yaml:"exclude"`
 }
-type Registrator struct {
+type Target struct {
 	Address string `yaml:"address"`
-	T       string `yaml:"type"`
+	Type    string `yaml:"type"`
 	Auth    Auth   `yaml:"auth"` //TODO register between tenants
 }
 

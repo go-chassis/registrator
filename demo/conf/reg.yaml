@@ -1,0 +1,15 @@
+source:
+  type: servicecenter
+  address: http://127.0.0.1:30100
+  fetchInterval: 60s #how long to fetch services and instances and register them to target registry,
+                     #if your instances is not changing rapidly, you can set it to longer
+  exclude: SERVICECENTER,CseConfigCenter,REGISTRATOR
+target:
+  type: servicecenter
+  address: http://127.0.0.1:30200
+  heartbeatInterval: 30s # how long to send heart beat to target registry
+auth:
+  accessKey:
+  secretKey:
+  project:
+

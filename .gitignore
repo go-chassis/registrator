@@ -15,3 +15,10 @@
 
 .idea/
 vendor
+demo/conf/REGISTRATOR/
+demo/log/
+demo/reg.log
+demo/registrator
+go.sum
+main
+reg.log
