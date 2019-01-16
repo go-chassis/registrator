@@ -16,13 +16,11 @@ type Configuration struct {
 
 type Source struct {
 	Address string `yaml:"address"`
-	Type    string `yaml:"type"`
 	Auth    Auth   `yaml:"auth"` //TODO register between tenants
 	Exclude string `yaml:"exclude"`
 }
 type Target struct {
 	Address string `yaml:"address"`
-	Type    string `yaml:"type"`
 	Auth    Auth   `yaml:"auth"` //TODO register between tenants
 }
 
