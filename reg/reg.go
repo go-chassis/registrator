@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"github.com/go-chassis/go-chassis/core/registry"
 	"github.com/go-chassis/go-chassis/pkg/runtime"
-	"github.com/go-chassis/go-sc-client"
-	"github.com/go-chassis/go-sc-client/proto"
+	"github.com/go-chassis/go-chassis/pkg/scclient"
+	"github.com/go-chassis/go-chassis/pkg/scclient/proto"
 	"github.com/go-mesh/openlogging"
 	"github.com/go-mesh/registrator/cmd"
 	"github.com/go-mesh/registrator/config"
@@ -59,7 +59,9 @@ func GetOptions(address string) (client.Options, error) {
 	var tlsConfig *tls.Config
 	if schema == "https" {
 		ssl = true
-		tlsConfig = &tls.Config{}
+		tlsConfig = &tls.Config{
+			InsecureSkipVerify: true,
+		}
 	}
 
 	sco := client.Options{}

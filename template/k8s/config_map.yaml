@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registrator-config
+data:
+  reg.yaml: |-
+    source:
+      address: http://127.0.0.1:30100
+      fetchInterval: 60s
+      exclude: SERVICECENTER,CseConfigCenter,REGISTRATOR
+    target:
+      address: http://127.0.0.1:30200
+      heartbeatInterval: 30s
+    auth:
+      accessKey:
+      secretKey:
+      project:
+  microservice.yaml: |-
+    service_description:
+      name: REGISTRATOR
+      version: 0.1
+  chassis.yaml: |-
+    cse:
+      service:
+        registry:
+          address: http://127.0.0.1:30100
+      protocols:
+        rest:
+          listenAddress: 0.0.0.0:8080
+  auth.yaml: |-
+    cse:
+      credentials:
+        accessKey: xxx
+        secretKey: xxx
+        project: default

@@ -1,7 +1,7 @@
 package reg
 
 import (
-	"github.com/go-chassis/go-sc-client/proto"
+	"github.com/go-chassis/go-chassis/pkg/scclient/proto"
 	"github.com/patrickmn/go-cache"
 )
 
