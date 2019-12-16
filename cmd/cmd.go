@@ -24,17 +24,6 @@ func ReadParams() error {
 			Usage:       "config path",
 			Destination: &CLIParam.ConfPath,
 		},
-		cli.StringFlag{
-			Name:        "registerInterval",
-			Value:       "30s",
-			Usage:       "register interval",
-			Destination: &CLIParam.RegisterInterval,
-		}, cli.StringFlag{
-			Name:        "fetchInterval",
-			Value:       "30s",
-			Usage:       "fetch interval",
-			Destination: &CLIParam.FetchInterval,
-		},
 	}
 	app.Action = func(c *cli.Context) error {
 		return nil

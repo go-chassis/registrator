@@ -7,7 +7,7 @@ data:
     source:
       address: http://127.0.0.1:30100
       fetchInterval: 60s
-      exclude: SERVICECENTER,CseConfigCenter,REGISTRATOR
+      exclude: SERVICECENTER,CseConfigCenter,CseMonitoring,REGISTRATOR
     target:
       address: http://127.0.0.1:30200
       heartbeatInterval: 30s
@@ -24,6 +24,7 @@ data:
       service:
         registry:
           address: http://127.0.0.1:30100
+          disabled: true
       protocols:
         rest:
           listenAddress: 0.0.0.0:8080
