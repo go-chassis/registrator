@@ -2,11 +2,7 @@ source:
   address: https://cse.cn-north-1.myhuaweicloud.com
   fetchInterval: 60s #how long to fetch services and instances and register them to target registry,
                   #if your instances is not changing rapidly, you can set it to longer
-  exclude: SERVICECENTER,CseConfigCenter,REGISTRATOR
+  exclude: SERVICECENTER,CseConfigCenter,CseMonitoring,REGISTRATOR
 target:
-  address: http://127.0.0.1:30200
+  address: http://127.0.0.1:30100
   heartbeatInterval: 30s # how long to send heart beat to target registry
-auth:
-  accessKey: xxxx
-  secretKey: xxx
-

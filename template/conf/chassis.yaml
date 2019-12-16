@@ -3,6 +3,7 @@ cse:
   service:
     registry:
       address: http://127.0.0.1:30100
+      disabled: true
   protocols:
     rest:
       listenAddress: 0.0.0.0:8080

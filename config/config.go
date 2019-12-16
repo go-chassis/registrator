@@ -15,13 +15,15 @@ type Configuration struct {
 }
 
 type Source struct {
-	Address string `yaml:"address"`
-	Auth    Auth   `yaml:"auth"` //TODO register between tenants
-	Exclude string `yaml:"exclude"`
+	Address       string `yaml:"address"`
+	Auth          Auth   `yaml:"auth"`    //TODO register between tenants
+	Exclude       string `yaml:"exclude"` // service names, separated by commas
+	FetchInterval string `yaml:"fetchInterval"`
 }
 type Target struct {
-	Address string `yaml:"address"`
-	Auth    Auth   `yaml:"auth"` //TODO register between tenants
+	Address           string `yaml:"address"`
+	Auth              Auth   `yaml:"auth"` //TODO register between tenants
+	HeartbeatInterval string `yaml:"heartbeatInterval"`
 }
 
 type Auth struct {
