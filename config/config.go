@@ -32,7 +32,7 @@ type Auth struct {
 	Project string `yaml:"project"`
 }
 
-func ReadYAML() error {
+func Init() error {
 	b, err := ioutil.ReadFile(cmd.CLIParam.ConfPath)
 	if err != nil {
 		return err
@@ -40,5 +40,15 @@ func ReadYAML() error {
 	if err := yaml.Unmarshal(b, Config); err != nil {
 		return err
 	}
+	setDefaultValue()
 	return nil
+}
+
+func setDefaultValue() {
+	if Config.Source.FetchInterval == "" {
+		Config.Source.FetchInterval = "60s"
+	}
+	if Config.Target.HeartbeatInterval == "" {
+		Config.Target.HeartbeatInterval = "30s"
+	}
 }

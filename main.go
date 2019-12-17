@@ -19,7 +19,7 @@ func main() {
 	if err := cmd.ReadParams(); err != nil {
 		openlogging.Fatal("can not init CLI: " + err.Error())
 	}
-	if err := config.ReadYAML(); err != nil {
+	if err := config.Init(); err != nil {
 		openlogging.Fatal("can not read config: " + err.Error())
 	}
 
