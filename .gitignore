@@ -21,4 +21,6 @@ demo/reg.log
 demo/registrator
 go.sum
 main
-reg.log
+**/log
+**/*.log
+conf/**/schema

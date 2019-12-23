@@ -1,36 +1,21 @@
 package config
 
 import (
+	"io/ioutil"
+	"os"
+
 	"github.com/go-mesh/registrator/cmd"
 	"gopkg.in/yaml.v2"
-	"io/ioutil"
+)
+
+const (
+	SourceAddressEnv     = "SOURCE_ADDRESS"
+	TargetAddressEnv     = "TARGET_ADDRESS"
+	FetchIntervalEnv     = "FETCH_INTERVAL"
+	HeartbeatIntervalEnv = "HEARTBEAT_INTERVAL"
 )
 
 var Config = &Configuration{}
-
-type Configuration struct {
-	Source Source `yaml:"source"`
-	Target Target `yaml:"target"`
-	Auth   Auth   `yaml:"auth"`
-}
-
-type Source struct {
-	Address       string `yaml:"address"`
-	Auth          Auth   `yaml:"auth"`    //TODO register between tenants
-	Exclude       string `yaml:"exclude"` // service names, separated by commas
-	FetchInterval string `yaml:"fetchInterval"`
-}
-type Target struct {
-	Address           string `yaml:"address"`
-	Auth              Auth   `yaml:"auth"` //TODO register between tenants
-	HeartbeatInterval string `yaml:"heartbeatInterval"`
-}
-
-type Auth struct {
-	AK      string `yaml:"accessKey"`
-	SK      string `yaml:"secretKey"`
-	Project string `yaml:"project"`
-}
 
 func Init() error {
 	b, err := ioutil.ReadFile(cmd.CLIParam.ConfPath)
@@ -40,13 +25,25 @@ func Init() error {
 	if err := yaml.Unmarshal(b, Config); err != nil {
 		return err
 	}
+	if v := os.Getenv(SourceAddressEnv); v != "" {
+		Config.Source.Address = v
+	}
+	if v := os.Getenv(FetchIntervalEnv); v != "" {
+		Config.Source.FetchInterval = v
+	}
+	if v := os.Getenv(TargetAddressEnv); v != "" {
+		Config.Target.Address = v
+	}
+	if v := os.Getenv(HeartbeatIntervalEnv); v != "" {
+		Config.Target.HeartbeatInterval = v
+	}
 	setDefaultValue()
 	return nil
 }
 
 func setDefaultValue() {
 	if Config.Source.FetchInterval == "" {
-		Config.Source.FetchInterval = "60s"
+		Config.Source.FetchInterval = "120s"
 	}
 	if Config.Target.HeartbeatInterval == "" {
 		Config.Target.HeartbeatInterval = "30s"
