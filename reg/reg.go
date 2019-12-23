@@ -95,8 +95,10 @@ func doFetchService() {
 		openlogging.Error("can not get instances: " + err.Error())
 		return
 	}
+	// 将新实例merge到老实例中，不删除老实例，解决问题：开启自动注销功能的实例重启后，
+	// 实例从老引擎主动下线，注册到新引擎。
+	// 我们要求迁移过程中不删除服务静态信息，所以服务静态信息不考虑被删除的情况
 	SaveInstances(instancesMap)
-
 	// register services to target registry
 	for _, s := range ms {
 		_, err = targetRegistry.RegisterService(s)
@@ -104,8 +106,10 @@ func doFetchService() {
 			openlogging.Error("can not register service:" + err.Error())
 		}
 	}
+	// 拿全量的实例信息进行注册
+	allInstanceMap := GetInstances()
 	// register instances to target registry
-	for _, instances := range instancesMap {
+	for _, instances := range allInstanceMap {
 		for _, ins := range instances {
 			_, err := targetRegistry.RegisterMicroServiceInstance(ins)
 			if err != nil {
@@ -143,7 +147,7 @@ func FetchService() error {
 	if err != nil {
 		return err
 	}
-	openlogging.Info("Fetch service/instance interval: " + fi.String())
+	openlogging.Info("Fetch interval: " + fi.String())
 	ft := time.NewTicker(fi)
 	doFetchService()
 	go func() {
@@ -171,7 +175,6 @@ func Heartbeat() error {
 					if err != nil {
 						openlogging.Error(
 							fmt.Sprintf("can not register instance [%s]: %s", ins.InstanceId, err.Error()))
-
 					}
 				}
 			}

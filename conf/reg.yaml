@@ -1,0 +1,7 @@
+source:
+  address: http://127.0.0.1:30100
+  fetchInterval: 120s # interval to fetch service/instance and register them to target registry
+  exclude: SERVICECENTER,CseConfigCenter,CseMonitoring,REGISTRATOR
+target:
+  address: http://127.0.0.1:30100
+  heartbeatInterval: 30s # how long to send heartbeat to target registry
